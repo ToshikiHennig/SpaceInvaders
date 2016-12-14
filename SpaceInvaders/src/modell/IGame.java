@@ -1,16 +1,23 @@
 package modell;
 
-public interface IGame extends IPlayer, IInvaderBlock{
+import javafx.scene.Group;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
-	void createInvader();
+public interface IGame{
 	
-	void leftArrowPressed();
+	void startGame(Pane pane);
 	
-	void rightArrowPressed();
+	void leftMovement();
 	
-	void spacePressed();
+	void rightMovement();
 	
-	void escapePressed();
+	void fire(Pane pane);
+	
+	void pause();
+	
+	void onhit();
 	
 	void mouseclickPause();
 	

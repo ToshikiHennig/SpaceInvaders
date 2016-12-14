@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="800.0" maxWidth="1000.0" minHeight="800.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-image: url(file:C:/Users/a610237/workspace/SpaceInvaders/src/Galaxy.jpg); -fx-background-position: center;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <GridPane prefHeight="858.0" prefWidth="1052.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="685.0" minHeight="10.0" prefHeight="685.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane style="-fx-background-color: rgba(0,0,0,0.7);">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Points:" textFill="WHITE">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label text="Lives:♥♥♥" textFill="WHITE" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+                  <Label text="Round:" textFill="WHITE" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <Pane fx:id="gamePane" focusTraversable="true" onKeyPressed="#move" prefHeight="685.0" prefWidth="1000.0" GridPane.rowIndex="1">
+               <children>
+                  <Group fx:id="invaderGroup" layoutX="14.0" layoutY="14.0">
+                     <children>
+                        <VBox fx:id="invaderLayout" prefHeight="121.0" prefWidth="100.0">
+                           <children>
+                              <HBox fx:id="invaderColumn1" prefHeight="100.0" prefWidth="200.0" />
+                              <HBox fx:id="invaderColumn2" prefHeight="100.0" prefWidth="200.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </Group>
+               </children></Pane>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>
