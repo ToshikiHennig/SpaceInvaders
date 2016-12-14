@@ -15,6 +15,8 @@ public class Player implements IPlayer{
 	private boolean laserOnScreen = false;
 	private Rectangle player = new Rectangle(100, 100);
 	private int score;
+	private Rectangle laser;
+	private Timeline timeline;
 	@Override
 	public void moveLeft() {
 		if(player.getLayoutX() > 0){
@@ -44,18 +46,44 @@ public class Player implements IPlayer{
 
 	@Override
 	public void shoot(Pane pane) {
-			Rectangle laser = new Rectangle(5, 10);
-			laser.setFill(Color.RED);
-			pane.getChildren().add(laser);
-			laser.relocate(player.getLayoutX() + 48, (pane.getPrefHeight() - 100));
-			Timeline timeline = new Timeline(new KeyFrame(
-			        Duration.millis(2),
-			        ae -> laser.setLayoutY(laser.getLayoutY() - 1)));
-			timeline.setCycleCount(Animation.INDEFINITE);
-			timeline.play();
-//			laserOnScreen = true;
+
+		if(laserOnScreen){
+			return;
+		}else{
+			createLaser(pane);
+			LaserTimer(pane);
+			laserOnScreen = true;
+		}
+
 
 	
+	}
+	public void createLaser(Pane pane){
+		laser = new Rectangle(5, 10);
+		laser.setFill(Color.RED);
+		pane.getChildren().add(laser);
+		laser.relocate(player.getLayoutX() + 48, (pane.getPrefHeight() - 100));
+	}
+	
+	public void moveLaser(Pane pane){
+		if(laser.getLayoutY() == 0){
+			timeline.stop();
+			timeline.setCycleCount(0);
+			pane.getChildren().remove(laser);
+			laserOnScreen = false;
+		}else{
+			laser.setLayoutY(laser.getLayoutY() - 1);
+		}
+
+		
+	}
+	
+	public void LaserTimer(Pane pane){
+		timeline = new Timeline(new KeyFrame(
+		        Duration.millis(2),
+		        ae -> moveLaser(pane)));
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
 	}
 
 	@Override

@@ -14,4 +14,6 @@ public interface IInvaderBlock extends IMovement{
 	void timeRight();
 	
 	void timeLeft();
+	
+	void shoot(Pane pane);
 }

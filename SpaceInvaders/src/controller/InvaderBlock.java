@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -21,12 +22,17 @@ import modell.IInvaderBlock;
 public class InvaderBlock implements IInvaderBlock{
 	private boolean endRight = false;
 	Group invaderRowList = new Group();
+	Invader invader;
+	int invaderId = 1;
 	Timeline timeline;
+	HBox invaderrow1, invaderrow2;
+	int min = 0;
+	int max = 5;
+	int randomInvader = ThreadLocalRandom.current().nextInt(min, max + 1);
 	@Override
 	public void moveLeft() {
 		if(invaderRowList.getLayoutX() > 0){
 			invaderRowList.setLayoutX(invaderRowList.getLayoutX() - 50);
-			System.out.println(invaderRowList.getLayoutX());
 		}
 		else{
 			endRight = false;
@@ -40,9 +46,8 @@ public class InvaderBlock implements IInvaderBlock{
 
 	@Override
 	public void moveRight() {
-		if(invaderRowList.getLayoutX() < 700){
+		if(invaderRowList.getLayoutX() < 650){
 			invaderRowList.setLayoutX(invaderRowList.getLayoutX() + 50);
-			System.out.println(invaderRowList.getLayoutX());
 		}
 		else{
 			endRight = true;
@@ -78,31 +83,23 @@ public class InvaderBlock implements IInvaderBlock{
 
 	@Override
 	public void createInvaderBlock(Pane pane) {
-		HBox invaderrow1 = new HBox();
-		HBox invaderrow2 = new HBox();
+		invaderrow1 = new HBox();
+		invaderrow2 = new HBox();
 		VBox invaderColumns = new VBox();
 		invaderColumns.getChildren().addAll(invaderrow1, invaderrow2);
 		invaderRowList.getChildren().addAll(invaderColumns);
-		
 		int a = 0;
 		int b = 0;
 //		Invader invader = new Invader();
 //		invader.createInvader();
 		for(int i = 0; i < 10; i++){
 			if(a == 5){
-				Image image = new Image("invader1.png");
-				Rectangle invader = new Rectangle(60, 60);
-				ImagePattern imagepattern = new ImagePattern(image);
-				invader.setFill(imagepattern);
-////				invaderRowList.add(invader);
-				invaderrow1.getChildren().add(invader);
+				invader = new Invader();
+				invader.createInvader(invaderrow1, pane);
+				System.out.println(invaderrow1.getChildren().size());
 			}else{
-				Image image = new Image("invader1.png");
-				Rectangle invader = new Rectangle(60, 60);
-				ImagePattern imagepattern = new ImagePattern(image);
-				invader.setFill(imagepattern);
-////				invaderRowList.add(invader);
-				invaderrow2.getChildren().add(invader);
+				invader = new Invader();
+				invader.createInvader(invaderrow2, pane);
 				a++;	
 			}
 		
@@ -128,6 +125,12 @@ public class InvaderBlock implements IInvaderBlock{
 		        ae -> moveLeft()));
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
+		
+	}
+
+	@Override
+	public void shoot(Pane pane) {
+		invader.shoot(pane);
 		
 	}
 
