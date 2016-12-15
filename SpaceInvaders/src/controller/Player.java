@@ -14,6 +14,7 @@ import modell.IPlayer;
 public class Player implements IPlayer{
 	private boolean laserOnScreen = false;
 	private Rectangle player = new Rectangle(100, 100);
+	InvaderBlock invader = new InvaderBlock();
 	private int score;
 	private Rectangle laser;
 	private Timeline timeline;
@@ -73,6 +74,7 @@ public class Player implements IPlayer{
 			laserOnScreen = false;
 		}else{
 			laser.setLayoutY(laser.getLayoutY() - 1);
+			onHit(laser);
 		}
 
 		
@@ -88,8 +90,13 @@ public class Player implements IPlayer{
 
 	@Override
 	public void hit() {
-		// TODO Auto-generated method stub
-		
+//		invader.onHit(laser);
+	}
+	
+	public void onHit(Rectangle laser){
+		if(laser.intersects(invader.getInvaderRowList().getBoundsInLocal())){
+			System.out.println("getroffen");
+		}
 	}
 
 	@Override
@@ -127,4 +134,13 @@ public class Player implements IPlayer{
 		
 	}
 
+	public Rectangle getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Rectangle player) {
+		this.player = player;
+	}
+
+	
 }

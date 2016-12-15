@@ -1,6 +1,7 @@
 package modell;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public interface ICombat {
 
